@@ -17,7 +17,7 @@ int main()
 
     char str1[256];
     char str2[256];
-    /*
+   
     cout << "Input first str: ";
     cin >> str1;
     cout << "Input second str: ";
@@ -29,16 +29,16 @@ int main()
 
     cout << "ANSWER1: " << ans << endl;
 
-    ans = levenshtein_distance_recursion(str1, str2);
+    ans = levenshtein_recursion(str1, str2);
     cout << "ANSWER2: " << ans << endl;
     
     
     ans = damerau_levenshtein_distance(str1, str2);
     cout << "ANSWER3: " << ans << endl;
 
-    ans = levenshtein_distance_table_n_recursion(str1, str2);
+    ans = levenshtein_table_n_recursion(str1, str2);
     cout << "ANSWER4: " << ans << endl;
-    */
+   
     test();
 
 

@@ -1,6 +1,10 @@
 #ifndef HELPFUL_OPERATIONS_H_
 #define HELPFUL_OPERATIONS_H_
 
+#include <cstring>
+#include <cmath>
+
+
 #define DELETION_COST 1
 #define INSERTION_COST 1
 #define INFINIT 10000
