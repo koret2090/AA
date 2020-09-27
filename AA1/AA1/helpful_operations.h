@@ -9,8 +9,8 @@
 #define INSERTION_COST 1
 #define INFINIT 10000
 
-void fill_matrix_with_infinity(int** matrix, size_t rows, size_t columns);
-void fill_string_with_random_symbols(size_t len, char* string);
+void fill_matrix_with_infinity(int** matrix, long int rows, long int columns);
+void fill_string_with_random_symbols(long int len, char* string);
 
 template<typename T>
 T my_min(T var1, T var2, T var3)

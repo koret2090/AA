@@ -8,7 +8,7 @@
 #include "matrix.h"
 #include <algorithm>
 
-size_t damerau_levenshtein_distance(const char* str1, const char* str2);
+long int damerau_levenshtein_distance(const char* str1, const char* str2);
 
 #endif // !DAMERAU_H_
 

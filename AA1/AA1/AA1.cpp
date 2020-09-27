@@ -9,43 +9,77 @@
 #include "tests.h"
 
 using namespace std;
-
+void menu();
 
 int main()
 {
     cout << "Hello World!" << endl;
 
-    char str1[256];
-    char str2[256];
-   
-    cout << "Input first str: ";
-    cin >> str1;
-    cout << "Input second str: ";
-    cin >> str2;
-
-
-    
-    size_t ans = levenshtein_distance(str1, str2);
-
-    cout << "ANSWER1: " << ans << endl;
-
-    ans = levenshtein_recursion(str1, str2);
-    cout << "ANSWER2: " << ans << endl;
-    
-    
-    ans = damerau_levenshtein_distance(str1, str2);
-    cout << "ANSWER3: " << ans << endl;
-
-    ans = levenshtein_table_n_recursion(str1, str2);
-    cout << "ANSWER4: " << ans << endl;
-   
-    test();
-
+    menu();
 
     return 0;
 }
 
+void menu()
+{
+    char str1[256] = "";
+    char str2[256] = "";
 
+    int choice = -1;
+    long int answer = 0;
+    while (choice)
+    {
+        cout << "0 - Exit\n\
+1 - Input strings\n\
+2 - Levenshtein with matrix\n\
+3 - Levenshtein recursive\n\
+4 - Levenshtein recursive with matrix\n\
+5 - Damerau-Levenshtein with matrix\n\
+6 - Timing tests\n\
+Your choice: ";
+        cin >> choice;
+        cout << endl;
+
+        switch (choice)
+        {
+        case 1:
+            cout << "Input first str: ";
+            std::cin.getline(str1, 256);
+            cout << "Input second str: ";
+            std::cin.getline(str2, 256);
+            getchar();
+            break;
+        case 2:
+            answer =  levenshtein_distance(str1, str2);
+            cout << "Answer: " << answer << endl;
+            getchar();
+            break;
+        case 3:
+            answer = levenshtein_recursion(str1, str2);
+            cout << "Answer: " << answer << endl;
+            getchar();
+            break;
+        case 4:
+            answer = levenshtein_table_n_recursion(str1, str2);
+            cout << "Answer: " << answer << endl;
+            getchar();
+            break;
+        case 5:
+            answer = damerau_levenshtein_distance(str1, str2);
+            cout << "Answer: " << answer << endl;
+            getchar();
+            break;
+        case 6:
+            test();
+            getchar();
+            break;
+        default:
+            continue;
+        }
+    }
+
+    //test();
+}
 
 
 

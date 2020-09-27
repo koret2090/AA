@@ -6,7 +6,7 @@
 #include <cstring>
 #include "matrix.h"
 
-size_t levenshtein_distance(const char* str1, const char* str2);
+long int levenshtein_distance(const char* str1, const char* str2);
 
 #endif // !TABLE_H_
 

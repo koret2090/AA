@@ -3,7 +3,7 @@
 
 #define RANDOM_SYMBOLS_LEN 37
 
-void fill_matrix_with_infinity(int** matrix, size_t rows, size_t columns)
+void fill_matrix_with_infinity(int** matrix, long int rows, long int columns)
 {
     for (int i = 0; i < rows; i++)
     {
@@ -12,9 +12,9 @@ void fill_matrix_with_infinity(int** matrix, size_t rows, size_t columns)
     }
 }
 
-void fill_string_with_random_symbols(size_t len, char* string)
+void fill_string_with_random_symbols(long int len, char* string)
 {
     const char symbols[]  = "1234567890qwertyuiopasdfghjklzxcvbnm";
-    for (size_t i = 0; i < len; i++)
+    for (long int i = 0; i < len; i++)
         string[i] = symbols[rand() % RANDOM_SYMBOLS_LEN];
 }
