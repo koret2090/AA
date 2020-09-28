@@ -19,6 +19,7 @@ void free_matrix(int*** matrix, long int rows)
 
 void print_matrix(int** matrix, long int rows, long int columns)
 {
+    std::cout << "M A T R I X" << '\n';
     for (long int i = 0; i < rows; i++) {
         for (long int j = 0; j < columns; j++)
             std::cout << matrix[i][j] << "  ";

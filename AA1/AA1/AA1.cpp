@@ -13,8 +13,23 @@ void menu();
 
 int main()
 {
+    /*
     cout << "Hello World!" << endl;
 
+    char str1[256] = "";
+    char str2[256] = "";
+
+    cout << "Input first str: ";
+    std::cin.getline(str1, 256);
+    cout << "Input second str: ";
+    std::cin.getline(str2, 256);
+
+
+
+
+    cout << "check: " << levenshtein_distance("123", "132") << endl;
+    cout << "check: " << damerau_levenshtein_distance("123", "132") << endl;
+    */
     menu();
 
     return 0;
@@ -44,29 +59,32 @@ Your choice: ";
         {
         case 1:
             cout << "Input first str: ";
+            getchar();
             std::cin.getline(str1, 256);
             cout << "Input second str: ";
             std::cin.getline(str2, 256);
-            getchar();
+            //getchar();
+            //cout << "STR1: " << str1 << endl;
+            //cout << "STR2: " << str2 << endl;
             break;
         case 2:
             answer =  levenshtein_distance(str1, str2);
-            cout << "Answer: " << answer << endl;
+            cout << endl << "Answer: " << answer << endl << endl;
             getchar();
             break;
         case 3:
             answer = levenshtein_recursion(str1, str2);
-            cout << "Answer: " << answer << endl;
+            cout << endl << "Answer: " << answer << endl << endl;
             getchar();
             break;
         case 4:
             answer = levenshtein_table_n_recursion(str1, str2);
-            cout << "Answer: " << answer << endl;
+            cout << endl << "Answer: " << answer << endl << endl;
             getchar();
             break;
         case 5:
             answer = damerau_levenshtein_distance(str1, str2);
-            cout << "Answer: " << answer << endl;
+            cout << endl << "Answer: " << answer << endl << endl;
             getchar();
             break;
         case 6:
