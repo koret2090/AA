@@ -56,7 +56,7 @@ long int levenshtein_table_n_recursion(const char* str1, const char* str2)
     //int answer = matrix[len1 - 1][len2 - 1];
     int answer = my_min(deletion, insertion, replacement);
 
-    print_matrix(matrix, len1, len2);
+    //print_matrix(matrix, len1, len2);
 
 
     // очищение памяти из под матрицы

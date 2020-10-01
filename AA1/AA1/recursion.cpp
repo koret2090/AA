@@ -1,11 +1,12 @@
 #include "recursion.h"
+#include <cstdlib>
 
 long int levenshtein_recursion(const char* str1, long int len1, const char* str2, long int len2)
 {
     // если одно слово по итогу короче другого, то
     // оставшаяся длина - кол-во вставок недостающих символов
     if (len1 <= 0 || len2 <= 0)
-        return abs((int)(len2 - len1));
+        return std::abs((int)(len2 - len1));
 
     int sub_cost = 0;
     if (str1[len1 - 1] != str2[len2 - 1])

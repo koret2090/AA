@@ -32,7 +32,7 @@ long int levenshtein_distance(const char* str1, const char* str2)
 
     int answer = matrix[len1 - 1][len2 - 1];
 
-    print_matrix(matrix, len1, len2);
+    //print_matrix(matrix, len1, len2);
     // очищение памяти из под матрицы
     free_matrix(&matrix, len1);
 

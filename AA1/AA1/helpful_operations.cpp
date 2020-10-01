@@ -1,7 +1,7 @@
 #include "helpful_operations.h"
 #include <random>
 
-#define RANDOM_SYMBOLS_LEN 37
+#define RANDOM_SYMBOLS_LEN 36
 
 void fill_matrix_with_infinity(int** matrix, long int rows, long int columns)
 {
