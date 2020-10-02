@@ -285,11 +285,11 @@ $$C_1 * (len1 + 1) + (len1 + 1) * C_1 * (len2 + 1) + 2C_2 + C_2 * len $$
 \end{enumerate}
 
 \section{Средства реализации}
-В лабораторной работе был использован язык $C$++, так как это быстрый, компилируемый типизированный язык программирования.
+В лабораторной работе был использован язык $C$++\hyperref[CPlusPlus]{[1]}, так как это быстрый, компилируемый типизированный язык программирования.
 
-Среда разработки - $Qt$.
+Среда разработки - $Qt$\hyperref[Cute]{[2]}.
 
-Для замеров процессорного времени была использована функция $clock()$.
+Для замеров процессорного времени была использована функция $clock()$\hyperref[CLOCK]{[3]}.
 \newpage
 
 \section{Реализация алгоритмов}
@@ -564,11 +564,23 @@ long int levenshtein_table_n_recursion(const char* str1, const char* str2)
 \addcontentsline{toc}{chapter}{Литература}
 
 \begin{enumerate}
-	\item Бьерн Страуструп. Язык программирования С++. -URL:\par 
-	\href{https://codernet.ru/books/c_plus/bern_straustrup_yazyk_programmirovaniya_c_specialnoe_izdanie/}{https://codernet.ru/books/c\_plus/bern\_straustrup\_yazyk\_programmirovaniya\_
-		c\_specialnoe\_izdanie/}(дата обращения:
+	\label{CPlusPlus}
+	\item[1)] Бьерн Страуструп. Язык программирования С++. -URL:\par 
+	\href{https://codernet.ru/books/c_plus/bern_straustrup_yazyk_programmirovaniya_c_specialnoe_izdanie/}
+	{https://codernet.ru/books/c\_plus/bern\_straustrup\_yazyk\_programmirovaniya\_
+		c\_specialnoe\_izdanie/}\par(дата обращения:
 	01.10.2020). Текст: электронный.
-	\item Вычисление расстояний Левенштейна.-URL:\par
+	
+	\label{Cute}
+	\item[2)] Qt. -URL:\par
+	\href{https://www.qt.io/}{https://www.qt.io/} (дата обращения: 01.10.2020). Текст: электронный.
+	
+	\label{CLOCK}
+	\item[3)] Функция $clock$. -URL:\par
+	\href{https://docs.microsoft.com/ru-ru/cpp/c-runtime-library/reference/clock?view=vs-2019}{https://docs.microsoft.com/ru-ru/cpp/c-runtime-library/reference/clock?view=vs-2019} (дата обращения:
+	01.10.2020). Текст: электронный.
+	
+	\item[4)] Вычисление расстояний Левенштейна.-URL:\par
 	\href{https://foxford.ru/wiki/informatika/vychislenie-rasstoyania-levensteyna}{https://foxford.ru/wiki/informatika/vychislenie-rasstoyania-levensteyna} (дата \par обращения:
 	01.10.2020). Текст: электронный.
 \end{enumerate}
