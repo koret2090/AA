@@ -89,50 +89,66 @@
 
 \begin{document}	
 	%\def\chaptername{} % убирает "Глава"
-	\begin{titlepage}
-		\newgeometry{pdftex, left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
-		\fontsize{12pt}{12pt}\selectfont
-		\noindent \begin{minipage}{0.15\textwidth}
-			\includegraphics[width=\linewidth]{baum.jpg}
-		\end{minipage}
-		\noindent\begin{minipage}{0.9\textwidth}\centering
-			\textbf{Министерство науки и высшего образования Российской Федерации}\\
-			\textbf{Федеральное государственное бюджетное образовательное учреждение высшего образования}\\
-			\textbf{«Московский государственный технический университет имени Н.Э.~Баумана}\\
-			\textbf{(национальный исследовательский университет)»}\\
-			\textbf{(МГТУ им. Н.Э.~Баумана)}
-		\end{minipage}
-		
-		\noindent\rule{18cm}{3pt}
-		\newline\newline
-		\noindent ФАКУЛЬТЕТ \underline{«Информатика и системы управления»} 
-		\newline\newline
-		\noindent КАФЕДРА \underline{«Программное обеспечение ЭВМ и информационные технологии»}
-		\newline\newline\newline\newline\newline\newline\newline
-		
-		
-		\begin{center}
-			\Large\textbf{Отчет по лабораторной работе №1 \newline по курсу "Анализ алгоритмов"}\newline
-		\end{center}
-		
-		\noindent\textbf{Тема} \underline{Расстояния Левенштейна и Дамерау-Левенштейна}
-		\newline\newline\newline
-		\noindent\textbf{Студент} \underline{Сусликов Д.В.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}
-		\newline\newline
-		\noindent\textbf{Группа} \underline{ИУ7-55~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}
-		\newline\newline
-		\noindent\textbf{Оценка (баллы)} \underline{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}
-		\newline\newline
-		\noindent\textbf{Преподаватели} \underline{Волкова Л.Л., Строганов Ю.В.~~~~~~~~~~~~~~}
-		\newline
-		
-		\begin{center}
-			\vfill
-			Москва~---~\the\year
-			~г.
-		\end{center}
-		\restoregeometry
-	\end{titlepage}
+	\begin{table}[ht]
+		\centering
+		\begin{tabular}{|c|p{400pt}|} 
+			\hline
+			\begin{tabular}[c]{@{}c@{}} \includegraphics[scale=0.37]{EmblemBMSTU} \\\end{tabular} &
+			\footnotesize\begin{tabular}[c]{@{}c@{}}\textbf{Министерство~науки~и~высшего~образования~Российской~Федерации}\\\textbf{Федеральное~государственное~бюджетное~образовательное~учреждение}\\\textbf{~высшего~образования}\\\textbf{«Московский~государственный~технический~университет}\\\textbf{имени~Н.Э.~Баумана}\\\textbf{(национальный~исследовательский~университет)»}\\\textbf{(МГТУ~им.~Н.Э.~Баумана)}\\\end{tabular}  \\
+			\hline
+		\end{tabular}
+	\end{table}
+	\noindent\rule{\textwidth}{4pt}
+	\noindent\rule[14pt]{\textwidth}{1pt}
+	\hfill 
+	\noindent
+	\makebox{ФАКУЛЬТЕТ~}%
+	\makebox[\textwidth][l]{\underline{~~~~«Информатика и системы управления»~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}%
+	\\
+	\noindent
+	\makebox{КАФЕДРА~}%
+	\makebox[\textwidth][l]{\underline{~~~~~~~«Программное обеспечение ЭВМ и информационные технологии»~~~~~~~~}}%
+	\\
+	
+	
+	\begin{center}
+		\vspace{3cm}
+		{\bf\huge Отчёт\par}
+		{\bf\Large по лабораторной работе № 1\par}
+		\vspace{0.5cm}
+	\end{center}
+	
+	
+	\noindent
+	\makebox{\large{\bf Название:}~~~}
+	\makebox[\textwidth][l]{\large\underline{~Расстояния Левенштейна и Дамерау-Левенштейна~~~~~~~~~~~~~}}\\
+	
+	\noindent
+	\makebox{\large{\bf Дисциплина:}~~~}
+	\makebox[\textwidth][l]{\large\underline{~Анализ алгоритмов~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}\\
+	
+	\vspace{1.5cm}
+	\noindent
+	\begin{tabular}{l c c c c c}
+		Студент      & ~ИУ7-55Б~               & \hspace{3.5cm} & \hspace{3.5cm}                 & &  Д.В. Сусликов \\\cline{2-2}\cline{4-4} \cline{6-6} 
+		\hspace{3cm} & {\footnotesize(Группа)} &                & {\footnotesize(Подпись, дата)} & & {\footnotesize(И.О. Фамилия)}
+	\end{tabular}
+	
+	\vspace{1cm}
+	
+	\noindent
+	\begin{tabular}{l c c c c}
+		Преподователь & \hspace{6cm}   & \hspace{3.5cm}                 & & Л.Л. Волкова \\\cline{3-3} \cline{5-5} 
+		\hspace{3cm}  &                & {\footnotesize(Подпись, дата)} & & {\footnotesize(И.О. Фамилия)}
+	\end{tabular}
+	
+	\begin{center}	
+		\vfill
+		\large \textit {Москва, 2020 г.}
+	\end{center}
+	
+	\thispagestyle {empty}
+	\pagebreak
 	
 	\tableofcontents
 	\onehalfspacing
