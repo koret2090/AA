@@ -4,8 +4,9 @@
 
 void test()
 {
-    for (int len = 1; len <= 501; len+= 100)
+    for (int len = 100; len <= 500; len+= 100)
     {
+        std::cout << "LENGTH: " << len << '\n';
         int** matrix1 = create_matrix(len, len);
         int** matrix2 = create_matrix(len, len);
         int** result_matrix = create_matrix(len, len);

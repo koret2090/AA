@@ -84,6 +84,8 @@ Your choice: ";
             break;
         case 4:
             vinograd_modified_matrix_mult(matrix, rows, columns, matrix2, columns, rows);
+        case 5:
+            test();
         default:
             continue;
         }
