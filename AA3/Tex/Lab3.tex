@@ -1,0 +1,186 @@
+\documentclass[14pt, a4paper]{extarticle}
+\usepackage{GOST}
+\usepackage{array}
+\usepackage{verbatim}
+\usepackage[detect-all]{siunitx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\usepackage{ifthen}
+
+
+%\usepackage{tempora}
+
+
+
+\makeatletter
+\renewcommand\@biblabel[1]{#1.}
+\makeatother
+
+% Для листинга кода:
+\usepackage{listings}
+\lstset{ %
+	language=c++,                 % выбор языка для подсветки (здесь это С)
+	basicstyle=\small\sffamily, % размер и начертание шрифта для подсветки кода
+	numbers=left,               % где поставить нумерацию строк (слева\справа)
+	numberstyle=\tiny,           % размер шрифта для номеров строк
+	stepnumber=1,                   % размер шага между двумя номерами строк
+	numbersep=5pt,                % как далеко отстоят номера строк от подсвечиваемого кода
+	showspaces=false,            % показывать или нет пробелы специальными отступами
+	showstringspaces=false,      % показывать или нет пробелы в строках
+	showtabs=false,             % показывать или нет табуляцию в строках
+	frame=single,              % рисовать рамку вокруг кода
+	tabsize=2,                 % размер табуляции по умолчанию равен 2 пробелам
+	captionpos=t,              % позиция заголовка вверху [t] или внизу [b] 
+	breaklines=true,           % автоматически переносить строки (да\нет)
+	breakatwhitespace=false, % переносить строки только если есть пробел
+	escapeinside={\#*}{*)}   % если нужно добавить комментарии в коде
+}
+
+
+%для графиков
+\usepackage{pgfplots}
+\usepackage{filecontents}
+\usetikzlibrary{datavisualization}
+\usetikzlibrary{datavisualization.formats.functions}
+\begin{filecontents}{Std.dat}
+	100 8300
+	200 41400
+	300 176000
+	400 490000
+	500 960000
+\end{filecontents}
+
+\begin{filecontents}{Vin.dat}
+	100 4800
+	200 34000
+	300 140000
+	400 391000
+	500 760000
+\end{filecontents}
+
+\begin{filecontents}{VinMod.dat}
+	100 3000
+	200 23500
+	300 98000
+	400 289000
+	500 563000
+\end{filecontents}
+
+
+\begin{filecontents}{Std2.dat}
+	101 8500
+	201 42200
+	301 180000
+	401 491000
+	501 977000
+\end{filecontents}
+
+\begin{filecontents}{Vin2.dat}
+	101 4850
+	201 34500
+	301 141000
+	401 392000
+	501 780000
+\end{filecontents}
+
+\begin{filecontents}{VinMod2.dat}
+	101 3050
+	201 24000
+	301 101000
+	401 291000
+	501 565000
+\end{filecontents}
+
+
+\begin{document}
+	
+	\begin{table}[ht]
+		\centering
+		\begin{tabular}{|c|p{400pt}|} 
+			\hline
+			\begin{tabular}[c]{@{}c@{}} \includegraphics[scale=1]{baum.jpg} \\\end{tabular} &
+			\footnotesize\begin{tabular}[c]{@{}c@{}}\textbf{Министерство~науки~и~высшего~образования~Российской~Федерации}\\\textbf{Федеральное~государственное~бюджетное~образовательное~учреждение}\\\textbf{~высшего~образования}\\\textbf{«Московский~государственный~технический~университет}\\\textbf{имени~Н.Э.~Баумана}\\\textbf{(национальный~исследовательский~университет)»}\\\textbf{(МГТУ~им.~Н.Э.~Баумана)}\\\end{tabular}  \\
+			\hline
+		\end{tabular}
+	\end{table}
+	\noindent\rule{\textwidth}{4pt}
+	\noindent\rule[14pt]{\textwidth}{1pt}
+	\hfill 
+	\noindent
+	\makebox{ФАКУЛЬТЕТ~}%
+	\makebox[\textwidth][l]{\underline{~«Информатика и системы управления»~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}}%
+	\\
+	\noindent
+	\makebox{КАФЕДРА~}%
+	\makebox[\textwidth][l]{\underline{~«Программное обеспечение ЭВМ и информационные технологии»~}}%
+	\\
+	
+	\begin{center}
+		\vspace{1.5cm}
+		{\bf\huge Отчёт\par}
+		{\bf\Large по лабораторной работе № 3\par}
+		\vspace{0.7cm}
+	\end{center}
+	
+	
+	\noindent
+	\makebox{\large{\bf Название:}~~~}
+	\makebox[\textwidth][l]{\large\underline{~Алгоритмы сортировки~~~~~~~~~~~~~}}\\
+	
+	\noindent
+	\makebox{\large{\bf Дисциплина:}~~~}
+	\makebox[\textwidth][l]{\large\underline{~Анализ алгоритмов~~~~~~~~~~~~~~~~~~~~~~~~~~}}\\
+	
+	\vspace{1.5cm}
+	\noindent
+	\begin{tabular}{l c c c c c}
+		Студент      & ~ИУ7-55Б~               & \hspace{2.5cm} & \hspace{2cm}                 & &  Д.В. Сусликов \\\cline{2-2}\cline{4-4} \cline{6-6} 
+		\hspace{3cm} & {\footnotesize(Группа)} &                & {\footnotesize(Подпись, дата)} & & {\footnotesize(И.О. Фамилия)}
+	\end{tabular}
+	
+	\noindent
+	\begin{tabular}{l c c c c}
+		Преподователь & \hspace{5cm}   & \hspace{2cm}                 & & ~~~~~~Л.Л. Волкова~~~~~~\\\cline{3-3} \cline{5-5} 
+		\hspace{3cm}  &                & {\footnotesize(Подпись, дата)} & & {\footnotesize(И.О. Фамилия)}
+	\end{tabular}
+	
+	\vspace{0.6cm}
+	\begin{center}	
+		\vfill
+		\large \textit {Москва, 2020}
+	\end{center}
+	
+	\thispagestyle {empty}
+	\pagebreak
+	
+	% СОДЕРЖАНИЕ 
+	\clearpage
+	\tableofcontents
+	
+	\clearpage
+	\section*{Введение}
+	\addcontentsline{toc}{chapter}{Введение}
+	Цель данной лабораторной работы - изучение алгоритмов умножения матрицы, получение навыков улучшения алгоритмов и подсчёта их трудоёмкости. В ходе работы будут рассмотрены 3 алгоритма:
+	\begin{enumerate}
+		\item[1)] стандартный алгоритм умножения матриц;
+		\item[2)] алгоритм Винограда;
+		\item[3)] улучшенный алгоритм Винограда.
+	\end{enumerate}
+	В лабораторной работе требуется:
+	\begin{enumerate}
+		\item[1)] изучить алгоритмы умножения матриц;
+		\item[2)] оптимизировать алгоритм Винограда;
+		\item[3)] дать теоритическую оценку стандартного алгоритма умножения матриц, алгоритма Винограда и улучшенного алгоритма Винограда;
+		\item[4)] реализовать три алгоритма умножения матриц;
+		\item[5)] сравнить алгоритмы умножения матриц.		
+	\end{enumerate}
+	
+	
+	\newpage
+	\section{Аналитическая часть}
+	В данном разделе представлены математические описания алгоритмов умножения матриц.
+	
+\end{document}
