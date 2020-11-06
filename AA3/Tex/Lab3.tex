@@ -45,55 +45,78 @@
 \usepackage{filecontents}
 \usetikzlibrary{datavisualization}
 \usetikzlibrary{datavisualization.formats.functions}
-\begin{filecontents}{Std.dat}
-	100 8300
-	200 41400
-	300 176000
-	400 490000
-	500 960000
+\begin{filecontents}{Bubble1.dat}
+	100 25
+	200 90
+	300 253
+	400 440
+	500 671
 \end{filecontents}
 
-\begin{filecontents}{Vin.dat}
-	100 4800
-	200 34000
-	300 140000
-	400 391000
-	500 760000
+\begin{filecontents}{Insertion1.dat}
+	100 2.2
+	200 2.3
+	300 3.8
+	400 4.2
+	500 5.8
 \end{filecontents}
 
-\begin{filecontents}{VinMod.dat}
-	100 3000
-	200 23500
-	300 98000
-	400 289000
-	500 563000
+\begin{filecontents}{Choices1.dat}
+	100 24.5
+	200 86
+	300 230
+	400 397
+	500 602
 \end{filecontents}
 
 
-\begin{filecontents}{Std2.dat}
-	101 8500
-	201 42200
-	301 180000
-	401 491000
-	501 977000
+\begin{filecontents}{Bubble2.dat}
+	100 55
+	200 214
+	300 507
+	400 915
+	500 1401
 \end{filecontents}
 
-\begin{filecontents}{Vin2.dat}
-	101 4850
-	201 34500
-	301 141000
-	401 392000
-	501 780000
+\begin{filecontents}{Insertion2.dat}
+	100 43
+	200 192
+	300 415
+	400 739
+	500 1144
 \end{filecontents}
 
-\begin{filecontents}{VinMod2.dat}
-	101 3050
-	201 24000
-	301 101000
-	401 291000
-	501 565000
+\begin{filecontents}{Choices2.dat}
+	100 23
+	200 130
+	300 240
+	400 450
+	500 691
 \end{filecontents}
 
+\begin{filecontents}{Bubble3.dat}
+	100 45
+	200 193
+	300 435
+	400 767
+	500 1095
+\end{filecontents}
+
+\begin{filecontents}{Insertion3.dat}
+	100 22
+	200 91
+	300 189
+	400 359
+	500 585
+\end{filecontents}
+
+\begin{filecontents}{Choices3.dat}
+	100 29
+	200 113
+	300 241
+	400 416
+	500 678
+\end{filecontents}
 
 \begin{document}
 	
@@ -226,9 +249,302 @@
 	\clearpage
 	Ниже на Рисунке 3 показана схема алгоритма сортировки выбором.
 	\begin{figure}[h!]
-		\centering{\includegraphics[scale= 0.8]{ins.png}}
-		\caption*{Рисунок 2 - Схема алгоритма сортировки вставками}
+		\centering{\includegraphics[scale= 0.8]{choices.png}}
+		\caption*{Рисунок 3 - Схема алгоритма сортировки выбором}
 	\end{figure}
 	
+	\clearpage
+	\subsection{Трудоемкость алгоритмов}
+	Введем модель трудоемкости для оценки алгоритмов: 
+	\begin{itemize}
+		\item[1)] Операции, чья стоимость 1: $=, +, *, \simeq, <, >, \geq, \leq, ==, !=, [], +=, -=, *=, /=, ++, --$;
+		\item[2)] стоимость цикла:\par
+		$f_{for}=f_{init}+f_{comp}+M(f_{body}+f_{increment}+f_{comp})$\par
+		Пример: $for(i=0,i<M;i++){/* body */}$\par
+		Результат: $2 + M(2+f_{body})$;
+		\item[3)] стоимость условного оператора\par
+		Пусть goto (переход к одной из ветвей) стоит 0, тогда\par
+		\begin{displaymath}
+			f_{f} = \left\{ \begin{array}{l l}
+				min(f_{A},f_{B}), & \textrm{лучший случай}\\
+				max(f_{A},f_{B}), & \textrm{худший случай}\\
+			\end{array} \right.
+		\end{displaymath}
+	\end{itemize}
+	\par Оценим трудоемкость алгоритмов.
 	
+	\subsubsection{Трудоемкость общей первичной проверки}
+		Трудоемкость проверки $if (size <= 0) { return; }$   - 1.
+		
+	\subsubsection{Трудоемкость алгоритма сортировки пузырьком}
+	Внутренний цикл будет выполняться: $n-0-1,n-1-1,n-2-1,...,n-(n-2)-1$ раз. Эта последовательность является арифметической прогрессией и ее можно записать как:\par
+	\begin{displaymath}
+		s_{bubble}=\frac{(n-1)n}{2}
+	\end{displaymath}\par
+
+	Расчет лучшего случая (массив отсортирован): 
+	
+	
+	
+	
+	
+	\clearpage
+	\section{Технологическая часть}
+	В данном разделе даны общие требования к программе, средства реализации и реализация алгоритмов. 
+	
+	\subsection{Общие требования к программе}
+	Требования к вводу:
+	\begin{enumerate}
+		\item[1)] возможность ввода размера массива;
+		\item[2)] ввод или автоматическая генерация массива. 
+	\end{enumerate}
+	Требования к программе:
+	\begin{enumerate}
+		\item[1)] при вводе неправильных размеров массива программа не должна завершаться аварийно;
+		\item[2)] корректная сортировка массива. 
+	\end{enumerate}
+
+	\subsection{Средства реализации}
+	В лабораторной работе был использован язык $C$++\hyperref[CPlusPlus]{[1]}, так как он известен, и на нём было написано множество предыдущих работ.
+	
+	Среда разработки - $Qt$\hyperref[Cute]{[2]}.
+	
+	Для замеров процессорного времени была использована функция $clock()$\hyperref[CLOCK]{[3]}.
+	\newpage
+	
+	
+	
+	\subsection{Реализация алгоритмов}
+	В Листинге 1 показана реализация алгоритма сортировки пузырьком.
+	
+	Листинг 1 -	Алгоритма сортировки пузырьком
+	\begin{lstlisting}
+		void bubble_sort(int* array, int size)
+		{
+			if (size <= 0)
+			{
+				std::cout << "Incorrect array" << std::endl;
+				return;
+			}
+			
+			for (int i = 0; i < size - 1; i++)
+			{
+				for (int j = 0; j < size - i - 1; j++)
+				{
+					if (array[j] > array[j + 1])
+					{
+						int temp = array[j];
+						array[j] = array[j + 1];
+						array[j + 1] = temp;
+					}
+				}
+			}
+		}
+	\end{lstlisting}
+	\newpage
+	
+	В Листинге 2 описана реализация алгоритма сортировки вставками.
+	
+	Листинг 2 - Алгоритм сортировки вставками
+	\begin{lstlisting}	
+		void insertion_sort(int *array, int size)
+		{
+			if (size <= 0)
+			{
+				std::cout << "Incorrect array" << std::endl;
+				return;
+			}
+			
+			for (int i = 1; i < size; i++)
+			{
+				int temp = array[i];
+				int item = i - 1;
+				while(item >= 0 && array[item] > temp)
+				{
+					array[item + 1] = array[item];
+					array[item] = temp;
+					item--;
+				}
+			}
+		}	
+	\end{lstlisting}
+	\newpage
+	
+	В Листинге 3 описана реализация алгоритма сортировки выбором.
+	
+	Листинг 3 - Алгоритм сортировки выбором
+	\begin{lstlisting}
+		void choices_sort(int* array, int size)
+		{
+			if (size <= 0)
+			{
+				std::cout << "Incorrect array" << std::endl;
+				return;
+			}
+			
+			for (int i = 0; i < size - 1; i++)
+			{
+				int smallest = i;
+				for (int j = i + 1; j < size; j++)
+				{
+					if (array[j] < array[smallest])
+					smallest = j;
+				}
+				int temp = array[i];
+				array[i] = array[smallest];
+				array[smallest] = temp;
+			}
+		}		
+	\end{lstlisting}
+	\newpage
+	
+	\subsection*{Вывод}
+	\addcontentsline{toc}{subsection}{Вывод}
+	По итогу, написанная программа соотвествует всем описанным выше требованиям, алгоритмы были реализованы на C++, так как данный язык известен, выполнено на нём много прошлых работ. 
+	
+	\clearpage
+	\section{Экспериментальный раздел}
+	В данном разделе представлены результаты работы программы и приведен анализ времени работы кажого из алгоритмов.
+	
+	\subsection{Примеры работы программы}
+	На Рисунке 4 представлены меню и ввод массива.
+	\begin{figure}[h]
+		\centering{\includegraphics{input.jpg}}
+		\caption*{Рисунок 4 - Меню выбора и ввод массива}
+	\end{figure}
+	
+	\newpage
+	На Рисунке 5 можно увидеть пример работы всех алгоритмов
+	\begin{figure}[h]
+		\centering{\includegraphics{example.jpg}}
+		\caption*{Рисунок 5 - Пример работы всех алгоритмов}
+	\end{figure}
+
+
+	\subsection{Анализ времени работы алгоритмов }
+	Эксперементы проводятся на массивах длин 100, 200, 300, 400, 500 элементов. Элементы массива заполняются произвольно.
+	
+	В первом случае берутся заранее отсортированные массивы. 
+	Графики зависимости времени работы алгоритмов от размеров массивов изображены на Рисунке 6.
+	
+	%\newpage
+	\begin{tikzpicture}
+		
+		\begin{axis}[
+			axis lines = left,
+			xlabel = Размер массива,
+			ylabel = {Кол-во тиков},
+			legend pos=north east,
+			ymajorgrids=true,
+			xmajorgrids=true,
+			width = 400
+			]
+			\addplot[color=red, mark=*] table[x index=0, y index=1] {Bubble1.dat}; 
+			\addplot[color=blue, mark=*] table[x index=0, y index=1] {Insertion1.dat};
+			\addplot[color=green, mark=*] table[x index=0, y index=1] {Choices1.dat};
+			
+			\addlegendentry{Bubble}
+			\addlegendentry{Insertion}
+			\addlegendentry{Choices}
+			
+		\end{axis}
+	\end{tikzpicture}
+	\par
+	Рисунок 6 -  Графики зависимости времени работы алгоритмов от размеров при заранее отсортированных массивах
+	
+	\newpage
+	Во втором случае берутся обратно отсортированные массивы.
+	Графики зависимости времени работы алгоритмов от размеров массивов изображены на Рисунке 7. \par
+	
+	%\newpage
+		\begin{tikzpicture}
+			
+			\begin{axis}[
+				axis lines = left,
+				xlabel = Размер массива,
+				ylabel = {Кол-во тиков},
+				legend pos=north east,
+				ymajorgrids=true,
+				xmajorgrids=true,
+				width = 400
+				]
+				\addplot[color=red, mark=*] table[x index=0, y index=1] {Bubble2.dat}; 
+				\addplot[color=blue, mark=*] table[x index=0, y index=1] {Insertion2.dat};
+				\addplot[color=green, mark=*] table[x index=0, y index=1] {Choices2.dat};
+				
+				\addlegendentry{Bubble}
+				\addlegendentry{Insertion}
+				\addlegendentry{Choices}
+				
+			\end{axis}
+		\end{tikzpicture}
+	\par
+	 Рисунок 7 -  Графики зависимости времени работы алгоритмов от размеров при заранее обратно отсортированных массивах
+	 
+	 \newpage
+	 В третьем случае берутся произвольные массивы.
+	 Графики зависимости времени работы алгоритмов от размеров массивов изображены на Рисунке 8. \par
+	 
+	 %\newpage
+	 \begin{tikzpicture}
+	 	
+	 	\begin{axis}[
+	 		axis lines = left,
+	 		xlabel = Размер массива,
+	 		ylabel = {Кол-во тиков},
+	 		legend pos=north east,
+	 		ymajorgrids=true,
+	 		xmajorgrids=true,
+	 		width = 400
+	 		]
+	 		\addplot[color=red, mark=*] table[x index=0, y index=1] {Bubble3.dat}; 
+	 		\addplot[color=blue, mark=*] table[x index=0, y index=1] {Insertion3.dat};
+	 		\addplot[color=green, mark=*] table[x index=0, y index=1] {Choices3.dat};
+	 		
+	 		\addlegendentry{Bubble}
+	 		\addlegendentry{Insertion}
+	 		\addlegendentry{Choices}
+	 		
+	 	\end{axis}
+	 \end{tikzpicture}
+	 \par
+	 Рисунок 8 -  Графики зависимости времени работы алгоритмов от размеров при произвольно заданных массивах
+	 
+	 \subsection*{Вывод}
+	 \addcontentsline{toc}{subsection}{Вывод}
+	 По итогу, все алгоритмы дают верный результат. По значениям замеров можно сделать вывод, что алгоритм сортировки вставками работает быстрее других алгоритмов в большинстве случаях. При обратно отсортированных массивах алгоритм сортировки вставками работает медленнее сортировки выбором. Алгоритм сортировки пузырьком оказался медленнее всех.  
+	
+	
+	\clearpage
+	\subsection*{Заключение}
+	\addcontentsline{toc}{section}{Заключение}
+	В ходе выполнения лабораторной работы были изучены алгоритмы сортировки массивов: пузырьком, вставками и выбором. Были даны теоритические оценки алгоритмов сортировки массиов. Была дана оценека трудоемкости алгоритмов. Также было произведено сравнение времени работы алгоритмов, в результате которого стало очевидно, что алгоритм сортировки вставками примерно в 2 раза быстрее сортировки пузырьком и в 1.2 раза - сортировки выбором (за исключением ситуации обратно отсортированного массива).
+	
+	\newpage	
+	\section*{Литература}
+	\addcontentsline{toc}{chapter}{Литература}
+		
+	\begin{enumerate}
+		\label{CPlusPlus}
+		\item[1)] Бьерн Страуструп. Язык программирования С++. -URL:\par 
+		\href{https://codernet.ru/books/c_plus/bern_straustrup_yazyk_programmirovaniya_c_specialnoe_izdanie/}
+		{https://codernet.ru/books/c\_plus/bern\_straustrup\_yazyk\_programmirovaniya\_
+			c\_specialnoe\_izdanie/}\par(дата обращения:
+		01.10.2020). Текст: электронный.
+		
+		\label{Cute}
+		\item[2)] Qt. -URL:\par
+		\href{https://www.qt.io/}{https://www.qt.io/} (дата обращения: 01.10.2020). Текст: электронный.
+		
+		\label{CLOCK}
+		\item[3)] Функция $clock$. -URL:\par
+		\href{https://docs.microsoft.com/ru-ru/cpp/c-runtime-library/reference/clock?view=vs-2019}{https://docs.microsoft.com/ru-ru/cpp/c-runtime-library/reference/clock?view=vs-2019} (дата обращения:
+		01.10.2020). Текст: электронный.
+		
+		\label{MatrixInfo}
+		\item[4)] Дж. Макконнелл. Основы современных алгоритмов.\newline 2-е дополненное издание
+		\newline Москва: Техносфера, 2004. - 368с. ISBN 5-94836-005-9\newline
+		с. 130 - 133
+		
+	\end{enumerate}
 \end{document}
