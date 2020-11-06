@@ -51,17 +51,16 @@ void choices_sort(int* array, int size)
         return;
     }
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size - 1; i++)
     {
-        int temp = array[0];
+        int smallest = i;
         for (int j = i + 1; j < size; j++)
         {
-            if (array[i] > array[j])
-            {
-                temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-            }
+            if (array[j] < array[smallest])
+                smallest = j;
         }
+        int temp = array[i];
+        array[i] = array[smallest];
+        array[smallest] = temp;
     }
 }
