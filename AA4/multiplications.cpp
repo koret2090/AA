@@ -174,7 +174,7 @@ void vinograd_matrix_mult_parallel(int** matrix1, int row1, int col1,\
     {
         int end_row = start_row + rows_for_thread;
         if (i == threads_amount - 1)
-            end_row = col1;
+            end_row = row1;
 
         threads[i] = std::thread(thread_row_mult, matrix1, col1, row_factor, start_row, end_row);
         start_row = end_row;
@@ -273,14 +273,13 @@ void vinograd_matrix_mult_parallel2(int** matrix1, int row1, int col1,\
 
     std::thread* threads = new std::thread[threads_amount];
 
-
     int rows_for_thread = row1 / threads_amount;
     int start_row = 0;
     for (int i = 0; i < threads_amount; i++)
     {
         int end_row = start_row + rows_for_thread;
         if (i == threads_amount - 1)
-            end_row = col1;
+            end_row = row1;
 
         threads[i] = std::thread(thread_cycle, matrix1, row1, col1, matrix2, row2, col2,\
                      temp_matrix, row_factor, col_factor, start_row, end_row);
