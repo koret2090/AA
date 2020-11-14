@@ -4,7 +4,7 @@
 
 void test()
 {
-    for (int len = 101; len <= 501; len+= 100)
+    for (int len = 100; len <= 500; len+= 100)
     {
         std::cout << "LENGTH: " << len << '\n';
         int** matrix1 = create_matrix(len, len);
@@ -14,20 +14,38 @@ void test()
         fill_matrix_with_random_nums(matrix1, len, len);
         fill_matrix_with_random_nums(matrix2, len, len);
 
-        clock_t start = clock();
-        std_matrix_mult(matrix1, len, len, matrix2, len, len, result_matrix);
-        clock_t end = clock();
-        std::cout << "Standart method time: " << (double)(end - start) << std::endl;
+        float sum = 0;
+        for (int _ = 0; _ < 10; _++)
+        {
+            clock_t start = clock();
+            vinograd_matrix_mult(matrix1, len, len, matrix2, len, len, result_matrix);
+            clock_t end = clock();
+            sum += (float)(end - start);
+        }
 
-        start = clock();
-        vinograd_matrix_mult(matrix1, len, len, matrix2, len, len, result_matrix);
-        end = clock();
-        std::cout << "Vinograd method time: " << (float)(end - start) << std::endl;
+        std::cout << "Vinograd method time: " << sum / 10 << std::endl;
 
-        start = clock();
-        vinograd_modified_matrix_mult(matrix1, len, len, matrix2, len, len, result_matrix);
-        end = clock();
-        std::cout << "Vinograd Modified method time: " << (float)(end - start) << std::endl << std::endl;
+        sum = 0;
+        for (int _ = 0; _ < 10; _++)
+        {
+            clock_t start = clock();
+            vinograd_matrix_mult_parallel(matrix1, len, len, matrix2, len, len, 4, result_matrix);
+            clock_t end = clock();
+            sum += (float)(end - start);
+        }
+
+        std::cout << "Vinograd parallel 1 method time: " << sum / 10<< std::endl;
+
+        sum = 0;
+        for (int _ = 0; _ < 10; _++)
+        {
+            clock_t start = clock();
+            vinograd_matrix_mult_parallel2(matrix1, len, len, matrix2, len, len, 4, result_matrix);
+            clock_t end = clock();
+            sum += (float)(end - start);
+        }
+
+        std::cout << "Vinograd parallel 2 method time: " << sum/ 10 << std::endl << std::endl;
 
         delete_matrix(matrix1, len);
         delete_matrix(matrix2, len);

@@ -31,9 +31,9 @@ void menu()
     {
         cout << "0 - Exit\n\
 1 - Input matrixes\n\
-2 - Standart\n\
-3 - Vinograd\n\
-4 - Vinograd modified\n\
+2 - Vinograd\n\
+3 - Vinograd parallel 1\n\
+4 - Vinograd parallel 2\n\
 5 - Timing tests\n\
 Your choice: ";
         cin >> choice;
@@ -59,14 +59,12 @@ Your choice: ";
 
             break;
         case 2:
-            std_matrix_mult(matrix, rows, columns, matrix2, columns, rows);
-            break;
-        case 3:
             vinograd_matrix_mult(matrix, rows, columns, matrix2, columns, rows);
             break;
+        case 3:
+            vinograd_matrix_mult_parallel(matrix, rows, columns, matrix2, columns, rows, 4);
+            break;
         case 4:
-            //vinograd_modified_matrix_mult(matrix, rows, columns, matrix2, columns, rows);
-            //vinograd_matrix_mult_parallel(matrix, rows, columns, matrix2, columns, rows, 4);
             vinograd_matrix_mult_parallel2(matrix, rows, columns, matrix2, columns, rows, 4);
             break;
         case 5:
