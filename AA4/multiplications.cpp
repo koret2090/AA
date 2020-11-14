@@ -1,21 +1,20 @@
 #include "matrix.h"
 #include "multiplications.h"
 
-//using namespace std;
+using namespace std;
 
 void vinograd_matrix_mult(int** matrix1, int row1, int col1,\
                           int** matrix2, int row2, int col2)
 {
     if ((col1 != row2) || row1 == 0 || row2 == 0)
     {
-        std::cout << "Incorrect matrixes" << std::endl;
+        cout << "Incorrect matrixes" << endl;
         return;
     }
 
     int** temp_matrix = create_matrix(row1, col2);
 
-    //int row_factor[row1];
-    int* row_factor = (int*)calloc(row1, sizeof(int));
+    int row_factor[row1];
     for (int i = 0; i < row1; i++)
     {
         row_factor[i] = 0;
@@ -23,8 +22,7 @@ void vinograd_matrix_mult(int** matrix1, int row1, int col1,\
             row_factor[i] = row_factor[i] + matrix1[i][2 * k] * matrix1[i][2 * k + 1];
     }
 
-    //int col_factor[col2];
-    int* col_factor = (int*)calloc(col2, sizeof(int));
+    int col_factor[col2];
     for (int i = 0; i < col2; i++)
     {
         col_factor[i] = 0;
@@ -53,8 +51,6 @@ void vinograd_matrix_mult(int** matrix1, int row1, int col1,\
     }
 
     print_matrix(temp_matrix, row1, col2);
-    free(row_factor);
-    free(col_factor);
     delete_matrix(temp_matrix, col2);
 }
 
@@ -63,7 +59,7 @@ void thread_row_mult(int** matrix1, int columns, int* row_factor, int start_row,
     for (int i = start_row; i < end_row; i++)
     {
         for (int j = 0; j < columns / 2; j++)
-            row_factor[i] = row_factor[i] + matrix1[i][2 * j] * matrix1[i][2 * j + 1];
+            row_factor[i] += matrix1[i][2 * j] * matrix1[i][2 * j + 1];
     }
 }
 
@@ -73,7 +69,7 @@ void thread_columns_mult(int** matrix2, int rows, int* col_factor,\
     for (int i = start_column; i < end_column; i++)
         {
             for (int j = 0; j < rows / 2; j++)
-                col_factor[i] = col_factor[i] + matrix2[2 * j][i] * matrix2[2 * j + 1][i];
+                col_factor[i] += matrix2[2 * j][i] * matrix2[2 * j + 1][i];
         }
 }
 
@@ -82,14 +78,12 @@ void vinograd_matrix_mult_parallel(int** matrix1, int row1, int col1,\
 {
     if ((col1 != row2) || row1 == 0 || row2 == 0)
     {
-        std::cout << "Incorrect matrixes" << std::endl;
+        cout << "Incorrect matrixes" << endl;
         return;
     }
 
-    int** temp_matrix = create_matrix(row1, col2);
-
     int* row_factor = (int*)calloc(row1, sizeof(int));
-    std::thread* threads = new std::thread[threads_amount];
+    thread* threads = new thread[threads_amount];
 
     int rows_for_thread = row1 / threads_amount;
     int start_row = 0;
@@ -99,7 +93,7 @@ void vinograd_matrix_mult_parallel(int** matrix1, int row1, int col1,\
         if (i == threads_amount - 1)
             end_row = row1;
 
-        threads[i] = std::thread(thread_row_mult, matrix1, col1, row_factor, start_row, end_row);
+        threads[i] = thread(thread_row_mult, matrix1, col1, row_factor, start_row, end_row);
         start_row = end_row;
     }
 
@@ -116,7 +110,7 @@ void vinograd_matrix_mult_parallel(int** matrix1, int row1, int col1,\
         if (i == threads_amount - 1)
             end_column = col2;
 
-        threads[i] = std::thread(thread_columns_mult, matrix2, col2, col_factor,\
+        threads[i] = thread(thread_columns_mult, matrix2, row2, col_factor,\
                             start_column, end_column);
         start_column = end_column;
     }
@@ -124,6 +118,7 @@ void vinograd_matrix_mult_parallel(int** matrix1, int row1, int col1,\
     for (int i = 0; i < threads_amount; i++)
         threads[i].join();
 
+    int** temp_matrix = create_matrix(row1, col2);
     for (int i = 0; i < row1; i++)
     {
        for (int j = 0; j < col2; j++)
@@ -172,7 +167,7 @@ void vinograd_matrix_mult_parallel2(int** matrix1, int row1, int col1,\
 {
     if ((col1 != row2) || row1 == 0 || row2 == 0)
     {
-        std::cout << "Incorrect matrixes" << std::endl;
+        cout << "Incorrect matrixes" << endl;
         return;
     }
 
@@ -195,7 +190,7 @@ void vinograd_matrix_mult_parallel2(int** matrix1, int row1, int col1,\
     }
 
 
-    std::thread* threads = new std::thread[threads_amount];
+    thread* threads = new thread[threads_amount];
 
     int rows_for_thread = row1 / threads_amount;
     int start_row = 0;
@@ -205,7 +200,7 @@ void vinograd_matrix_mult_parallel2(int** matrix1, int row1, int col1,\
         if (i == threads_amount - 1)
             end_row = row1;
 
-        threads[i] = std::thread(thread_cycle, matrix1, col1, matrix2, col2,\
+        threads[i] = thread(thread_cycle, matrix1, col1, matrix2, col2,\
                      temp_matrix, row_factor, col_factor, start_row, end_row);
         start_row = end_row;
     }
@@ -233,12 +228,11 @@ void vinograd_matrix_mult(int** matrix1, int row1, int col1,\
 {
     if ((col1 != row2) || row1 == 0 || row2 == 0)
     {
-        std::cout << "Incorrect matrixes" << std::endl;
+        cout << "Incorrect matrixes" << endl;
         return;
     }
 
-    //int row_factor[row1];
-    int* row_factor = (int*)calloc(row1, sizeof(int));
+    int row_factor[row1];
     for (int i = 0; i < row1; i++)
     {
         row_factor[i] = 0;
@@ -246,8 +240,7 @@ void vinograd_matrix_mult(int** matrix1, int row1, int col1,\
             row_factor[i] = row_factor[i] + matrix1[i][2 * k] * matrix1[i][2 * k + 1];
     }
 
-    //int col_factor[col2];
-    int* col_factor = (int*)calloc(col2, sizeof(int));
+    int col_factor[col2];
     for (int i = 0; i < col2; i++)
     {
         col_factor[i] = 0;
@@ -274,8 +267,6 @@ void vinograd_matrix_mult(int** matrix1, int row1, int col1,\
                 result_matrix[i][j] = result_matrix[i][j] + matrix1[i][col1 - 1] * matrix2[col1 - 1][j];
         }
     }
-    free(row_factor);
-    free(col_factor);
 }
 
 void vinograd_matrix_mult_parallel(int** matrix1, int row1, int col1,\
@@ -283,12 +274,12 @@ void vinograd_matrix_mult_parallel(int** matrix1, int row1, int col1,\
 {
     if ((col1 != row2) || row1 == 0 || row2 == 0)
     {
-        std::cout << "Incorrect matrixes" << std::endl;
+        cout << "Incorrect matrixes" << endl;
         return;
     }
 
+    thread* threads = new thread[threads_amount];
     int* row_factor = (int*)calloc(row1, sizeof(int));
-    std::thread* threads = new std::thread[threads_amount];
 
     int rows_for_thread = row1 / threads_amount;
     int start_row = 0;
@@ -298,7 +289,7 @@ void vinograd_matrix_mult_parallel(int** matrix1, int row1, int col1,\
         if (i == threads_amount - 1)
             end_row = row1;
 
-        threads[i] = std::thread(thread_row_mult, matrix1, col1, row_factor, start_row, end_row);
+        threads[i] = thread(thread_row_mult, matrix1, col1, row_factor, start_row, end_row);
         start_row = end_row;
     }
 
@@ -315,7 +306,7 @@ void vinograd_matrix_mult_parallel(int** matrix1, int row1, int col1,\
         if (i == threads_amount - 1)
             end_column = col2;
 
-        threads[i] = std::thread(thread_columns_mult, matrix2, col2, col_factor,\
+        threads[i] = thread(thread_columns_mult, matrix2, row2, col_factor,\
                             start_column, end_column);
         start_column = end_column;
     }
@@ -351,9 +342,11 @@ void vinograd_matrix_mult_parallel2(int** matrix1, int row1, int col1,\
 {
     if ((col1 != row2) || row1 == 0 || row2 == 0)
     {
-        std::cout << "Incorrect matrixes" << std::endl;
+        cout << "Incorrect matrixes" << endl;
         return;
     }
+
+    thread* threads = new thread[threads_amount];
 
     int* row_factor = (int*)calloc(row1, sizeof(int));
     for (int i = 0; i < row1; i++)
@@ -371,9 +364,6 @@ void vinograd_matrix_mult_parallel2(int** matrix1, int row1, int col1,\
             col_factor[i] = col_factor[i] + matrix2[2 * k][i] * matrix2[2 * k + 1][i];
     }
 
-
-    std::thread* threads = new std::thread[threads_amount];
-
     int rows_for_thread = row1 / threads_amount;
     int start_row = 0;
     for (int i = 0; i < threads_amount; i++)
@@ -382,7 +372,7 @@ void vinograd_matrix_mult_parallel2(int** matrix1, int row1, int col1,\
         if (i == threads_amount - 1)
             end_row = row1;
 
-        threads[i] = std::thread(thread_cycle, matrix1, col1, matrix2, col2,\
+        threads[i] = thread(thread_cycle, matrix1, col1, matrix2, col2,\
                      temp_matrix, row_factor, col_factor, start_row, end_row);
         start_row = end_row;
     }

@@ -22,6 +22,9 @@ void menu()
     int rows = 0;
     int columns = 0;
 
+    int rows2 = 0;
+    int columns2 = 0;
+
     int choice = -1;
 
     int** matrix = nullptr;
@@ -44,28 +47,34 @@ Your choice: ";
         case 1:
             cout << "Input rows amount: ";
             cin >> rows;
-            cout << "\nInput columns amount: ";
+            cout << "Input columns amount: ";
             cin >> columns;
-            if (rows > 0 && columns > 0)
+
+            cout << "\nInput rows amount: ";
+            cin >> rows2;
+            cout << "Input columns amount: ";
+            cin >> columns2;
+            cout << endl;
+            if (rows > 0 && columns > 0 && rows2 > 0 && columns2 > 0)
             {
                 matrix = create_matrix(rows, columns);
                 input_matrix(matrix, rows, columns);
 
-                matrix2 = create_matrix(columns, rows);
-                input_matrix(matrix2, columns, rows);
+                matrix2 = create_matrix(rows2, columns2);
+                input_matrix(matrix2, rows2, columns2);
             }
             else
                 cout << "\nIncorrect size!\n\n";
 
             break;
         case 2:
-            vinograd_matrix_mult(matrix, rows, columns, matrix2, columns, rows);
+            vinograd_matrix_mult(matrix, rows, columns, matrix2, rows2, columns2);
             break;
         case 3:
-            vinograd_matrix_mult_parallel(matrix, rows, columns, matrix2, columns, rows, 4);
+            vinograd_matrix_mult_parallel(matrix, rows, columns, matrix2, rows2, columns2, 4);
             break;
         case 4:
-            vinograd_matrix_mult_parallel2(matrix, rows, columns, matrix2, columns, rows, 4);
+            vinograd_matrix_mult_parallel2(matrix, rows, columns, matrix2, rows2, columns2, 4);
             break;
         case 5:
             test();
